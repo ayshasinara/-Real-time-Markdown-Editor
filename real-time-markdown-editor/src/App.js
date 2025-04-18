@@ -14,7 +14,7 @@ function App() {
   const [roomId, setRoomId] = useState('default-room');
   const textareaRef = useRef(null);
 
-  // Timeout to simulate typing delay
+
   const typingTimeout = useRef(null);
 
   const insertAtCursor = (text) => {
@@ -26,7 +26,7 @@ function App() {
     const newText = before + text + after;
     setMarkdownText(newText);
 
-    // Move cursor after inserted text
+
     setTimeout(() => {
       textarea.focus();
       textarea.setSelectionRange(start + text.length, start + text.length);
@@ -57,7 +57,7 @@ function App() {
     setShowEmojiPicker(false); 
   };
 
-  // Markdown insert functions
+
   const insertHeading1 = () => insertAtCursor('# Heading 1\n');
   const insertHeading2 = () => insertAtCursor('## Heading 2\n');
   const insertBold = () => insertAtCursor('**Bold Text**');
@@ -85,16 +85,16 @@ function App() {
     insertAtCursor(`${nextNumber}. List item\n`);
   };
 
-  // Reset Function
+
   const resetEditor = () => {
     setMarkdownText('');
   };
 
   useEffect(() => {
-    // Join the room once when component mounts
+  
     socket.emit('joinRoom', roomId);
 
-    // Handle socket events
+    
     socket.on('connect', () => {
       console.log('Connected to server');
     });
@@ -103,15 +103,15 @@ function App() {
       console.log('Disconnected from server');
     });
 
-    // Receive markdown updates from other clients
+
     socket.on('markdownUpdate', (incomingMarkdown) => {
       setMarkdownText(incomingMarkdown);
     });
 
     return () => {
-      socket.disconnect();  // Clean up when component unmounts
+      socket.disconnect();  
     };
-  }, [roomId]);  // Only rerun when roomId changes
+  }, [roomId]);  
 
   return (
     <div className="App">
@@ -159,7 +159,7 @@ function App() {
           {isTyping && <div style={typingIndicatorStyle}>Typing...</div>}
 
           <ReactMarkdown
-            children={String(markdownText)} // Ensure it's always a string
+            children={String(markdownText)} 
             components={{
               code({ node, inline, className, children, ...props }) {
                 const language = className?.replace('language-', '') || 'text';
@@ -184,7 +184,7 @@ function App() {
   );
 }
 
-// --- Styling ---
+
 
 const toolbarStyle = {
   marginBottom: '15px',
