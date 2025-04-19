@@ -60,6 +60,10 @@ function App() {
     typingTimeout.current = setTimeout(() => setIsTyping(false), 1000);
   };
 
+  const insertNextLine = () => {
+    insertAtCursor('<br>'); // Insert HTML line break
+  };
+  
   const emojis = ['😊', '😂', '😍', '😎', '🥺', '😜', '👍', '🙏', '❤️', '💀', '😁', '🤔', '😏', '🥳', '🤩', '💩', '🧑‍💻', '🧑‍🎤', '🎉', '🫣', '🤖', '🧡', '💚', '💙', '💛'];
 
   const insertEmoji = (emoji) => {
@@ -119,6 +123,7 @@ function App() {
         <button onClick={insertImage} style={buttonStyle}>Image</button>
         <button onClick={insertLink} style={buttonStyle}>Link</button>
         <button onClick={() => setShowEmojiPicker(!showEmojiPicker)} style={buttonStyle}>😊</button>
+        <button onClick={insertNextLine} style={buttonStyle}>Next Line</button> {/* Next Line Button */}
         <button onClick={resetEditor} style={resetButtonStyle}>Reset</button>
       </div>
 
