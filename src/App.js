@@ -5,7 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3030');
+const socket = io('http://localhost:3000');
 
 function App() {
   const [markdownText, setMarkdownText] = useState('');
@@ -16,7 +16,6 @@ function App() {
 
 
   const typingTimeout = useRef(null);
-
   const insertAtCursor = (text) => {
     const textarea = textareaRef.current;
     const start = textarea.selectionStart;
